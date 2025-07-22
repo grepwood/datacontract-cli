@@ -76,6 +76,12 @@ def obj_attributes_to_markdown(obj: BaseModel, excluded_fields: set = set(), is_
         for attr, value in obj_model.items()
         if value
     ]
+    if not is_in_table_cell:
+        attributes = [
+            (f"\n{bullet_char} `{attr}`" if value is True else f"\n{bullet_char} **{attr}:** {value}")
+            for attr, value in obj_model.items()
+            if value
+        ]
     description = f"*{description_to_markdown(description_value)}*"
     return newline_char.join([description] + attributes)
 
