@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- Markdown exporter generates bigger tables instead of including HTML break to create multiline table cells (#832)
+- Markdown exporter adds a newline at the beginning of each bulletpoint, to improve compatibility with some readers, like markdown-to-confluence (#832)
+
+
 ## [0.10.33] - 2025-07-29
 
 ### Added
@@ -20,8 +26,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - JUnit Test Report: Fixed incorrect syntax on handling warning test report. (#833)
-- Markdown exporter generates bigger tables instead of including HTML break to create multiline table cells (#832)
-- Markdown exporter adds a newline at the beginning of each bulletpoint, to improve compatibility with some readers, like markdown-to-confluence (#832)
 
 ## [0.10.31] - 2025-07-18
 
