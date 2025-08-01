@@ -1,13 +1,9 @@
 # urn:datacontract:checkout:orders-latest
 ## Info
 *Successful customer orders in the webshop. <br>All orders since 2020-01-01. <br>Orders with their line items are in their current state (no history included).<br>*
-
 - **title:** Orders Latest
-
 - **version:** 2.0.0
-
 - **owner:** Checkout Team
-
 - **contact:** {'name': 'John Doe (Data Product Owner)', 'url': 'https://teams.microsoft.com/l/channel/example/checkout'}
 
 ## Servers
@@ -17,20 +13,15 @@
 
 ## Terms
 *No description.*
-
 - **usage:** Data can be used for reports, analytics and machine learning use cases.
 Order may be linked and joined by other tables
-
 
 - **limitations:** Not suitable for real-time use cases.
 Data may not be used to identify individual customers.
 Max data processing per day: 10 TiB
 
-
 - **policies:** [{'url': 'https://example.com/privacy-policy', 'name': 'privacy-policy'}, {'description': 'External data is licensed under agreement 1234.', 'url': 'https://example.com/license/1234', 'name': 'license'}]
-
 - **billing:** 5000 USD per month
-
 - **noticePeriod:** P3M
 
 ## Models
@@ -63,53 +54,37 @@ Max data processing per day: 10 TiB
 ## Service levels
 ### Availability
 *The server is available during support hours*
-
 - **percentage:** 99.9%
 
 ### Retention
 *Data is retained for one year*
-
 - **period:** P1Y
 
 ### Latency
 *Data is available within 25 hours after the order was placed*
-
 - **threshold:** 25h
-
 - **sourceTimestampField:** orders.order_timestamp
-
 - **processedTimestampField:** orders.processed_timestamp
 
 ### Freshness
 *The age of the youngest row in a table.*
-
 - **threshold:** 25h
-
 - **timestampField:** orders.order_timestamp
 
 ### Frequency
 *Data is delivered once a day*
-
 - **type:** batch
-
 - **interval:** daily
-
 - **cron:** 0 0 * * *
 
 ### Support
 *The data is available during typical business hours at headquarters*
-
 - **time:** 9am to 5pm in EST on business days
-
 - **responseTime:** 1h
 
 ### Backup
 *Data is backed up once a week, every Sunday at 0:00 UTC.*
-
 - **interval:** weekly
-
 - **cron:** 0 0 * * 0
-
 - **recoveryTime:** 24 hours
-
 - **recoveryPoint:** 1 week

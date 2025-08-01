@@ -12,6 +12,7 @@ from datacontract.model.data_contract_specification import (
     ServiceLevel,
 )
 
+
 class MarkdownExporter(Exporter):
     """Exporter implementation for converting data contracts to Markdown."""
 
@@ -76,12 +77,6 @@ def obj_attributes_to_markdown(obj: BaseModel, excluded_fields: set = set(), is_
         for attr, value in obj_model.items()
         if value
     ]
-    if not is_in_table_cell:
-        attributes = [
-            (f"\n{bullet_char} `{attr}`" if value is True else f"\n{bullet_char} **{attr}:** {value}")
-            for attr, value in obj_model.items()
-            if value
-        ]
     description = f"*{description_to_markdown(description_value)}*"
     return newline_char.join([description] + attributes)
 
@@ -107,34 +102,31 @@ def servers_to_markdown(servers: Dict[str, Server]) -> str:
     attributes = []
     for server in tuple(servers.keys()):
         parameters = servers[server].model_dump(exclude_unset=True)
-        parameters.pop('type')
+        parameters.pop("type")
         for parameter in tuple(parameters.keys()):
-            if not (parameters[parameter] is None):
-                if not (parameter in attributes):
+            if parameters[parameter] is not None:
+                if parameter not in attributes:
                     attributes.append(parameter)
     attributes = tuple(attributes)
-    dashed_attributes = tuple(['-' * len(attr) for attr in attributes])
-    markdown_parts = [
-        '| Server | Type |',
-        '| ------ | ---- |'
-    ]
+    dashed_attributes = tuple(["-" * len(attr) for attr in attributes])
+    markdown_parts = ["| Server | Type |", "| ------ | ---- |"]
     there_are_attributes = len(attributes) > 0
     if there_are_attributes:
         markdown_parts[0] += f" {' | '.join(attributes)} |"
         markdown_parts[1] += f" {' | '.join(dashed_attributes)} |"
     for server_name, server in servers.items():
         attributes_for_this_server = server.model_dump(exclude_unset=True)
-        attributes_for_this_server.pop('type')
+        attributes_for_this_server.pop("type")
         add_these_attributes = []
         for attribute in tuple(attributes_for_this_server.keys()):
             if attributes_for_this_server[attribute] is None:
                 attributes_for_this_server.pop(attribute)
         for attribute in attributes:
-            if not (attribute in attributes_for_this_server):
-                add_these_attributes.append('')
+            if attribute not in attributes_for_this_server:
+                add_these_attributes.append("")
             else:
                 add_these_attributes.append(str(attributes_for_this_server[attribute]))
-        add_these_attributes = ' | '.join(add_these_attributes)
+        add_these_attributes = " | ".join(add_these_attributes)
         append_this = f"| {server_name} | {server.type or ''} |"
         if there_are_attributes:
             append_this += f" {add_these_attributes} |"
@@ -161,17 +153,13 @@ def model_to_markdown(model_name: str, model: Model) -> str:
     for field in tuple(model.fields.keys()):
         parameters = model.fields[field].model_dump(exclude_unset=True)
         for parameter in tuple(parameters.keys()):
-            if not (parameters[parameter] is None):
-                if not (parameter in attributes):
+            if parameters[parameter] is not None:
+                if parameter not in attributes:
                     attributes.append(parameter)
     attributes = tuple(attributes)
-    dashed_attributes = tuple(['-' * len(attr) for attr in attributes])
+    dashed_attributes = tuple(["-" * len(attr) for attr in attributes])
 
-    parts = [
-        f"### {model_name}",
-        f"*{description_to_markdown(model.description)}*",
-        ""
-    ]
+    parts = [f"### {model_name}", f"*{description_to_markdown(model.description)}*", ""]
     there_are_attributes = len(attributes) > 0
     assert there_are_attributes
     parts.append(f"| {' | '.join(attributes)} |")
@@ -188,7 +176,7 @@ def model_to_markdown(model_name: str, model: Model) -> str:
             if attribute in parameters:
                 append_this.append(str(parameters[attribute]))
             else:
-                append_this.append('')
+                append_this.append("")
         append_this = f"| {' | '.join(append_this)} |"
         parts.append(append_this)
 
