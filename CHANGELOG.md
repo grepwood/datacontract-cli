@@ -9,14 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `datacontract test` now supports testing HTTP APIs.
 - Markdown exporter generates bigger tables instead of including HTML break to create multiline table cells (#832)
 - Markdown exporter adds a newline at the beginning of each bulletpoint, to improve compatibility with some readers, like markdown-to-confluence (#832)
+
+### Fixed
+
+- Avro Importer: Optional and required enum types are now supported (#804)
 
 
 ## [0.10.33] - 2025-07-29
 
 ### Added
 - Export to Excel: Convert ODCS YAML to Excel https://github.com/datacontract/open-data-contract-standard-excel-template (#742)
+- Extra properties in Markdown export. (#842)
 
 
 ## [0.10.32] - 2025-07-28
